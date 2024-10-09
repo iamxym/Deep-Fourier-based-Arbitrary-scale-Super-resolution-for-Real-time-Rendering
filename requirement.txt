@@ -1,0 +1,12 @@
+lpips==0.1.4
+numpy==1.26.1
+onnx==1.15.0
+opencv-python==4.7.0.72
+packaging==24.0
+pybind11==2.11.1
+python-opencv==1.0.0.14
+thop==0.1.1.post2209072238
+torch==2.0.1
+torch-tb-profiler==0.4.3
+torchaudio==2.0.2
+torchvision==0.15.2
