@@ -5,4 +5,4 @@ SIGGRAPH 2024 Conference Paper: Deep Fourier-based Arbitrary-scale Super-resolut
 				<h2><b>😀😀😀<br/>Our work has been selected as SIGGRAPH 2024 Technical Papers Trailer ! <br/>😀😀😀 <br/><a href="https://www.youtube.com/watch?v=tjYVcOJONdI">The Trailer</a></b>
 			</div>
 
-Proect page:https://iamxym.github.io/DFASRR.github.io/
+Project page:https://iamxym.github.io/DFASRR.github.io/
