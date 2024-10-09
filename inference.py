@@ -84,7 +84,7 @@ def reparameterize(pretrained_model, rep_model,device=config.device, save_rep_ch
 def infer(net, test_scale,pretrained_model,modelPath,testpath,device=config.device):
     # n_steps 就是公式里的 T
     # net 是某个继承自 torch.nn.Module 的神经网络
-    resPath='./HFFM_ablation_4x/'+testpath.split('/')[-2]
+    resPath='./res/'
     if not os.path.exists(resPath):
         os.mkdir(resPath)
     dataset=BigDataset([testpath],[test_scale],is_test=True,isPatch=True,seq_length=1,lr_mode='read')
@@ -144,9 +144,8 @@ def infer(net, test_scale,pretrained_model,modelPath,testpath,device=config.devi
                     r1*=albedo
                     r1[pos]=r3[pos]
                     
-                    # if iter<=10000:
-                        # cv.imwrite('%s/%s-%s-%d.exr'%('test_results/','MD_3_0_ablation/up-hffm',str(scale[0].item()),fid),r1)
-                        # cv.imwrite('%s/%s-%s-%d.exr'%(resPath,'noPhase',str(scale[0].item()),fid),r1)
+                    if config.InferToFile:
+                        cv.imwrite('%s/%s-%s-%d.exr'%(resPath,config.scene,str(scale[0].item()),fid),r1)
                         # cv.imwrite('%s/%s-%s-%d.exr'%(resPath,'lr',str(scale[0].item()),fid),r2)
                         # cv.imwrite('%s/%s-%s-%d.exr'%(resPath,'gt',str(scale[0].item()),fid),r3)
                     
@@ -154,11 +153,7 @@ def infer(net, test_scale,pretrained_model,modelPath,testpath,device=config.devi
                     r1=res[0].detach().cpu().numpy().transpose([1,2,0]).clip(0,1)
                     r2=cur_lr_feature[0].detach().cpu().numpy().transpose([1,2,0])
                     r3=gt[0].detach().cpu().numpy().transpose([1,2,0])
-                    # if iter<=100000:
-                    #     cv.imwrite('%s/%s-%s-%d.png'%(resPath,'Model31_mod_234_finalloss_total',str(scale[0].item()),fid),(r1*255).round().astype(np.uint8))
-                    #     cv.imwrite('%s/%s-%s-%d.png'%(resPath,'lr',str(scale[0].item()),fid),(r2*255).round().astype(np.uint8))
-                    #     cv.imwrite('%s/%s-%s-%d.png'%(resPath,'gt',str(scale[0].item()),fid),(r3*255).round().astype(np.uint8))
-                    
+                                        
                 r1=(r1**(1/2.2)).clip(0,1)
                 r3=(r3**(1/2.2)).clip(0,1)
                 lp+=loss_net(torch.from_numpy(r1*2-1).permute(2,0,1).unsqueeze(0).to(device),torch.from_numpy(r3*2-1).permute(2,0,1).unsqueeze(0).to(device)).mean().item()
@@ -181,4 +176,4 @@ if __name__ == '__main__':
     for i in range(len(config.test_paths)):
         for _,item in enumerate(config.test_scale_list):
             print('start: ',item,',',config.test_paths[i])
-            infer(net,item,pretrained_model,config.modelPath+'Model31_mod_234_finalloss_total_100.pt',config.test_paths[i])#
+            infer(net,item,pretrained_model,config.modelPath+'Model31_mod_234_finalloss_100.pt',config.test_paths[i])#
