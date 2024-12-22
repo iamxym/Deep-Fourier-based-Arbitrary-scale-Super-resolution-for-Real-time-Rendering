@@ -74,4 +74,4 @@ If you think this project is helpful, please feel free to leave a star or cite o
 
 ## License
 
-This project is licensed under the MIT License. 
+This project is licensed under the Apache 2.0 license. 
