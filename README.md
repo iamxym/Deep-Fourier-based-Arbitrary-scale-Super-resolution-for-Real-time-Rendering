@@ -55,6 +55,8 @@ python3 inference.py
 
 And then you will found the super-resolution result in `res/`
 
+## How to generate dataset
+We provide a custom built Unreal Engine for generating dataset. Please refer to [ExtraNet](https://github.com/fuxihao66/ExtraNet) for specific details
 
 
 ## Citation
@@ -69,3 +71,7 @@ If you think this project is helpful, please feel free to leave a star or cite o
   year={2024}
 }
 ```
+
+## License
+
+This project is licensed under the MIT License. 
